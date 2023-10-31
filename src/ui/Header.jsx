@@ -1,26 +1,18 @@
 import logo from "../assets/logo.png";
 import { Icon } from "@iconify/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { signOut } from "../requests.js";
-import { useAuth } from "../context/TodoContext.jsx";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 export const Header = () => {
-  const { handleUser, getUser, handleAuth } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (getUser === null) {
-      navigate("/");
-    }
-  }, [getUser]);
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: () => signOut(),
     onSuccess: () => {
-      handleUser(null);
-      handleAuth(false);
+      queryClient.removeQueries();
+      navigate("/", { replace: true });
     },
     onError: (error) => {
       console.error("Sign-out error:", error.message);

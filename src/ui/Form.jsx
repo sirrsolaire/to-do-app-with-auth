@@ -14,6 +14,7 @@ export const Form = ({
     <form className="flex flex-col gap-2" onSubmit={handlesubmit}>
       <input
         type="text"
+        autoFocus={true}
         value={text}
         onChange={(e) => setText(e.target.value)}
         className={`py-3.5 bg-[#262626] rounded-lg px-4 text-white shadow-md placeholder:opacity-70 ${addClass}`}

@@ -33,14 +33,14 @@ export const RegisterForm = () => {
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8 py-40 max-w-[470px] mx-auto">
+    <div className="flex min-h-full flex-col justify-center px-6 lg:px-8 py-40 max-w-[500px] mx-auto">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
           Sign up
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm bg-[#161616] px-4 py-5 rounded-xl shadow-sm">
         <form className="space-y-6" method="POST" onSubmit={handleSubmit}>
           <div>
             <label

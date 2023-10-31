@@ -47,10 +47,10 @@ export async function signUp(formData) {
   });
 }
 
-export async function signIn(formData) {
+export async function signIn(email, password) {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: formData.email,
-    password: formData.password,
+    email: email,
+    password: password,
   });
 
   if (error) {
@@ -62,4 +62,15 @@ export async function signIn(formData) {
 
 export async function signOut() {
   const { error } = await supabase.auth.signOut();
+}
+
+export async function getCurrentUser() {
+  const { data: session } = await supabase.auth.getSession();
+  if (!session.session) return null;
+
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error) throw new Error(error.message);
+
+  return data?.user;
 }
