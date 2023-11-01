@@ -3,11 +3,14 @@ import { fetchData } from "../requests.js";
 import { ListItem } from "./ListItem.jsx";
 import { useEffect } from "react";
 import { errorNotify } from "../helpers/toasters/error.js";
+import { useUser } from "../features/authentication/useUser.js";
 
 export const ListSection = () => {
+  const { user } = useUser();
+  const { id } = user;
   const { data, error } = useQuery({
     queryKey: ["todos"],
-    queryFn: fetchData,
+    queryFn: () => fetchData(id),
   });
 
   useEffect(() => {

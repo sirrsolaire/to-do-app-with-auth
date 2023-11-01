@@ -1,10 +1,14 @@
 import supabase from "./supabase.js";
 
-export async function fetchData() {
-  let { data: list, error } = await supabase.from("todoList").select("*");
+export async function fetchData(id) {
+  let { data: list, error } = await supabase
+    .from("todoList")
+    .select("*")
+    .eq("profile_id", id);
   if (error) {
     throw new Error(error.message);
   }
+
   return list;
 }
 
