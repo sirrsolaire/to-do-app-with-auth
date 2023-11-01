@@ -1,4 +1,4 @@
-import { LoginForm } from "../ui/LoginForm.jsx";
+import { LoginForm } from "../features/authentication/LoginForm.jsx";
 
 export const Login = () => {
   return <LoginForm />;

@@ -1,16 +1,11 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getCurrentUser } from "../requests.js";
 import { Spinner } from "../ui/Spinner.jsx";
 import { useEffect } from "react";
+import { useUser } from "../features/authentication/useUser.js";
 
 export const ProtectedRoute = () => {
   const navigate = useNavigate();
-
-  const { data: user, isLoading } = useQuery({
-    queryKey: ["user"],
-    queryFn: getCurrentUser,
-  });
+  const { isLoading, user } = useUser();
 
   const isAuthenticated = user?.role === "authenticated";
 

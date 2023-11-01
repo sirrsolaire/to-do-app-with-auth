@@ -9,10 +9,9 @@ export async function fetchData() {
 }
 
 export async function postData(text) {
-  const { data, error } = await supabase
-    .from("todoList")
-    .insert([{ text }])
-    .select();
+  const { error } = await supabase.from("todoList").insert([{ text }]).select();
+
+  if (error) throw new Error(error.message);
 }
 
 export async function deleteData(id) {
@@ -24,7 +23,7 @@ export async function deleteData(id) {
 }
 
 export async function updateData(id, text) {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("todoList")
     .update({ text })
     .eq("id", id)
@@ -36,7 +35,7 @@ export async function updateData(id, text) {
 }
 
 export async function signUp(formData) {
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email: formData.email,
     password: formData.password,
     options: {
@@ -45,6 +44,8 @@ export async function signUp(formData) {
       },
     },
   });
+
+  if (error) throw new Error(error.message);
 }
 
 export async function signIn(email, password) {
@@ -62,6 +63,8 @@ export async function signIn(email, password) {
 
 export async function signOut() {
   const { error } = await supabase.auth.signOut();
+
+  if (error) throw new Error(error.message);
 }
 
 export async function getCurrentUser() {
