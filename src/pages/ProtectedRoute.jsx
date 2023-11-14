@@ -6,7 +6,6 @@ import { useUser } from "../features/authentication/useUser.js";
 export const ProtectedRoute = () => {
   const navigate = useNavigate();
   const { isLoading, user } = useUser();
-
   const isAuthenticated = user?.role === "authenticated";
 
   useEffect(() => {
